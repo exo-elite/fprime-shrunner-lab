@@ -1,0 +1,23 @@
+# BENIGN lab mirror of nasa/fprime's ext-aarch64-linux-led-blinker.yml
+# Used only to demonstrate the fork-PR -> self-hosted runner mechanism
+# in a private repo owned by the tester. No real fprime code runs here.
+
+name: "Lab: AArch64 Linux LedBlinker (mirror)"
+
+on:
+  pull_request:
+    branches: [devel, release/**]
+
+permissions:
+  contents: read
+
+jobs:
+  aarch64-integration:
+    name: "AArch64 Linux Integration Tests"
+    runs-on: [self-hosted, aarch64-linux]
+    timeout-minutes: 10
+    steps:
+      - name: "Idle check"
+        run: |
+          echo "Baseline: healthy workflow in default branch. No fork control here."
+          echo "event=${{ github.event_name }} ref=${{ github.ref }} head=${{ github.head_ref }}"
